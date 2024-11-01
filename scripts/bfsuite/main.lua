@@ -30,14 +30,14 @@ config.Version = "1.0.0"                                            -- version n
 config.ethosVersion = 1518                                          -- min version of ethos supported by this script
 config.ethosVersionString = "ETHOS < V1.5.18"                       -- string to print if ethos version error occurs
 config.defaultRateProfile = 4 -- ACTUAL                             -- default rate table [default = 4]
-config.supportedMspApiVersion = {"12.06", "12.07"}                  -- supported msp versions
+config.supportedMspApiVersion = {"1.46"}                            -- supported msp versions
 config.watchdogParam = 10                                           -- watchdog timeout for progress boxes [default = 10]
 
 -- features
 config.logEnable = false                                            -- will log to: /scripts/bfsuite/bfsuite.log [default = false]
 config.logEnableScreen = false                                      -- if config.logEnable is true then also print to screen [default = false]
 config.useCompiler = true                                           -- enable use of the compiler to improve speed [default = true]
-config.mspTxRxDebug = false                                         -- simple print of full msp payload that is sent and received [default = false]
+config.mspTxRxDebug = true                                         -- simple print of full msp payload that is sent and received [default = false]
 config.reloadOnSave = false                                         -- trigger a reload on save [default = false]
 config.skipRssiSensorCheck = false                                  -- skip checking for a valid rssi [ default = false]
 config.enternalElrsSensors = true                                   -- disable the integrated elrs telemetry processing [default = true]

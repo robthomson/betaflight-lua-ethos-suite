@@ -111,66 +111,9 @@ function msp.onConnectBgChecks()
             -- to confirm its done! 
             bfsuite.utils.playFileCommon("beep.wav")
             bfsuite.config.clockSetAlart = true
-        elseif (bfsuite.config.tailMode == nil or bfsuite.config.swashMode == nil) and msp.mspQueue:isProcessed() then
-            local message = {
-                command = 42, -- MIXER
-                processReply = function(self, buf)
-                    if #buf >= 19 then
-
-                        local tailMode = buf[2]
-                        local swashMode = buf[6]
-                        bfsuite.config.swashMode = swashMode
-                        bfsuite.config.tailMode = tailMode
-                        bfsuite.utils.log("Tail mode: " .. bfsuite.config.tailMode)
-                        bfsuite.utils.log("Swash mode: " .. bfsuite.config.swashMode)
-                    end
-                end,
-                simulatorResponse = {0, 1, 0, 0, 0, 2, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-            }
-            msp.mspQueue:add(message)
         elseif (bfsuite.config.activeProfile == nil or bfsuite.config.activeRateProfile == nil) then
 
             bfsuite.utils.getCurrentProfile()
-
-        elseif (bfsuite.config.servoCount == nil) and msp.mspQueue:isProcessed() then
-            local message = {
-                command = 120, -- MSP_SERVO_CONFIGURATIONS
-                processReply = function(self, buf)
-                    if #buf >= 20 then
-                        local servoCount = msp.mspHelper.readU8(buf)
-
-                        -- update master one in case changed
-                        bfsuite.config.servoCount = servoCount
-                    end
-                end,
-                simulatorResponse = {
-                    4, 180, 5, 12, 254, 244, 1, 244, 1, 244, 1, 144, 0, 0, 0, 1, 0, 160, 5, 12, 254, 244, 1, 244, 1, 244, 1, 144, 0, 0, 0, 1, 0, 14, 6, 12, 254, 244, 1, 244, 1, 244, 1, 144, 0, 0, 0,
-                    0, 0, 120, 5, 212, 254, 44, 1, 244, 1, 244, 1, 77, 1, 0, 0, 0, 0
-                }
-            }
-            msp.mspQueue:add(message)
-
-        elseif (bfsuite.config.servoOverride == nil) and msp.mspQueue:isProcessed() then
-            local message = {
-                command = 192, -- MSP_SERVO_OVERIDE
-                processReply = function(self, buf)
-                    if #buf >= 16 then
-
-                        for i = 0, bfsuite.config.servoCount do
-                            buf.offset = i
-                            local servoOverride = msp.mspHelper.readU8(buf)
-                            if servoOverride == 0 then
-                                bfsuite.utils.log("Servo overide: true")
-                                bfsuite.config.servoOverride = true
-                            end
-                        end
-                        if bfsuite.config.servoOverride == nil then bfsuite.config.servoOverride = false end
-                    end
-                end,
-                simulatorResponse = {209, 7, 209, 7, 209, 7, 209, 7, 209, 7, 209, 7, 209, 7, 209, 7}
-            }
-            msp.mspQueue:add(message)
-
             -- do this at end of last one
             msp.onConnectChecksInit = false
         end
@@ -179,9 +122,6 @@ function msp.onConnectBgChecks()
 end
 
 function msp.resetState()
-    bfsuite.config.servoOverride = nil
-    bfsuite.config.servoCount = nil
-    bfsuite.config.tailMode = nil
     bfsuite.config.apiVersion = nil
     bfsuite.config.clockSet = nil
     bfsuite.config.clockSetAlart = nil

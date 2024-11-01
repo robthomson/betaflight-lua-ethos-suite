@@ -1,8 +1,8 @@
 echo off
 
-set tgt=rfsuite
+set tgt=bfsuite
 
-set srcfolder=%DEV_RFSUITE_GIT_SRC%
+set srcfolder=%DEV_BFSUITE_GIT_SRC%
 set dstfolder=%DEV_SIM_SRC%
 
 REM "Remove destination folder"
