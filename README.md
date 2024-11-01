@@ -1,7 +1,6 @@
 # BFSUITE Lua Scripts for Ethos
 
-[Betaflight](https://github.com/rotorflight) is a Flight Control software suite designed for
-single-rotor helicopters. It consists of:
+Betaflight is a Flight Control software suite 
 
 - Betaflight Flight Controller Firmware
 - Betaflight Configurator, for flashing and configuring the flight controller
