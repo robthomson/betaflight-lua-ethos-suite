@@ -4,12 +4,11 @@ local tables = {}
 local activateWakeup = false
 local currentProfileChecked = false
 
-tables[0] = "app/pages/ratetables/none.lua"
-tables[1] = "app/pages/ratetables/betaflight.lua"
-tables[2] = "app/pages/ratetables/raceflight.lua"
-tables[3] = "app/pages/ratetables/kiss.lua"
-tables[4] = "app/pages/ratetables/actual.lua"
-tables[5] = "app/pages/ratetables/quick.lua"
+tables[0] = "app/pages/ratetables/betaflight.lua"
+tables[1] = "app/pages/ratetables/raceflight.lua"
+tables[2] = "app/pages/ratetables/kiss.lua"
+tables[3] = "app/pages/ratetables/actual.lua"
+tables[4] = "app/pages/ratetables/quick.lua"
 
 if bfsuite.rateProfile == nil then bfsuite.rateProfile = bfsuite.config.defaultRateProfile end
 
@@ -22,10 +21,12 @@ fields[13] = {t = "Rates Type", hidden = true, ratetype = 1, min = 0, max = 5, v
 local function postLoad(self)
     -- if the activeRateProfile is not what we are displaying
     -- then we need to trigger a reload of the page
-    local v = bfsuite.app.Page.values[1]
+    local v = bfsuite.app.Page.values[23]
     if v ~= nil then bfsuite.activeRateProfile = math.floor(v) end
 
+    print(bfsuite.activeRateProfile)
 
+  
     if bfsuite.activeRateProfile ~= nil then
         if bfsuite.activeRateProfile ~= bfsuite.rateProfile then
             bfsuite.rateProfile = bfsuite.activeRateProfile
@@ -33,7 +34,9 @@ local function postLoad(self)
             return
         end
     end
-
+    
+   
+  
     bfsuite.app.triggers.isReady = true
 
     activateWakeup = true
@@ -185,13 +188,13 @@ return {
     title = "Rates",
     reboot = false,
     eepromWrite = true,
-    minBytes = 25,
+    minBytes = 23,
     labels = labels,
     fields = fields,
     refreshOnRateChange = true,
     rows = mytable.rows,
     cols = mytable.cols,
-    simulatorResponse = {4, 18, 25, 32, 20, 0, 0, 18, 25, 32, 20, 0, 0, 32, 50, 45, 10, 0, 0, 56, 0, 56, 20, 0, 0},
+    simulatorResponse = {7, 0, 67, 67, 67, 0, 50, 0, 0, 0, 0, 7, 7, 0, 0, 100, 206, 7, 206, 7, 206, 7, 3},
     rTableName = mytable.rTableName,
     flagRateChange = flagRateChange,
     postLoad = postLoad,

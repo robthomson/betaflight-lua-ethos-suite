@@ -53,8 +53,8 @@ function utils.playFile(pkg, file)
     av = av:gsub("SD:", ""):gsub("RADIO:", ""):gsub("AUDIO:", ""):gsub("VOICE[1-4]:", "")
 
     -- Pre-define the base directory paths
-    local baseDir = rfsuite.config.suiteDir
-    local soundPack = rfsuite.config.soundPack
+    local baseDir = bfsuite.config.suiteDir
+    local soundPack = bfsuite.config.soundPack
     local audioPath = soundPack and ("/audio/" .. soundPack) or (av)
 
     -- Construct file paths
@@ -62,7 +62,7 @@ function utils.playFile(pkg, file)
     local wavDefault = baseDir .. "/audio/en/default/" .. pkg .. "/" .. file
 
     -- Check if locale file exists, else use the default
-    if rfsuite.utils.file_exists(wavLocale) then
+    if bfsuite.utils.file_exists(wavLocale) then
         system.playFile(wavLocale)
     else
         system.playFile(wavDefault)
@@ -71,7 +71,7 @@ end
 
 function utils.playFileCommon(file)
 
-        local wav = rfsuite.config.suiteDir .. "/audio/" .. file
+        local wav = bfsuite.config.suiteDir .. "/audio/" .. file
 
         system.playFile(wav)
       

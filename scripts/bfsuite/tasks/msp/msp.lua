@@ -73,7 +73,7 @@ function msp.onConnectBgChecks()
                         bfsuite.utils.log("MSP Version: " .. bfsuite.config.apiVersion)
                     end
                 end,
-                simulatorResponse = {0, 12, 7}
+                simulatorResponse = {0, 1, 46}
             }
             msp.mspQueue:add(message)
         elseif bfsuite.config.clockSet == nil and msp.mspQueue:isProcessed() then

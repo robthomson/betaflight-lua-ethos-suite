@@ -514,6 +514,7 @@ function app.wakeupUI()
         end
     end
 
+
     -- profile switching - trigger a reload when profile changes
     if bfsuite.config.profileSwitching == true and app.Page ~= nil and (app.Page.refreshOnProfileChange == true or app.Page.refreshOnRateChange == true) and app.uiState == app.uiStatus.pages and
         app.triggers.isSaving == false and bfsuite.app.dialogs.progressDisplay ~= true and bfsuite.bg.msp.mspQueue:isProcessed() then
@@ -573,6 +574,7 @@ function app.wakeupUI()
         end
 
     end
+  
 
     if app.triggers.telemetryState ~= 1 and app.triggers.disableRssiTimeout == false then
         if bfsuite.app.dialogs.progressDisplay == true then app.ui.progressDisplayClose() end
