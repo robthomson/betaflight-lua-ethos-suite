@@ -12,19 +12,18 @@ tables[4] = "app/pages/ratetables/quick.lua"
 
 if bfsuite.rateProfile == nil then bfsuite.rateProfile = bfsuite.config.defaultRateProfile end
 
+
 local mytable = assert(loadfile(tables[bfsuite.rateProfile]))()
 
 local fields = mytable.fields
 
-fields[13] = {t = "Rates Type", hidden = true, ratetype = 1, min = 0, max = 5, vals = {1}}
+fields[10] = {t = "Rates Type", hidden = true, ratetype = 0, min = 0, max = 4, vals = {23}}
 
 local function postLoad(self)
     -- if the activeRateProfile is not what we are displaying
     -- then we need to trigger a reload of the page
     local v = bfsuite.app.Page.values[23]
     if v ~= nil then bfsuite.activeRateProfile = math.floor(v) end
-
-    print(bfsuite.activeRateProfile)
 
   
     if bfsuite.activeRateProfile ~= nil then
@@ -121,8 +120,12 @@ local function openPage(idx, title, script)
 
             pos = {x = posX + padding, y = posY, w = w - padding, h = h}
 
+
+
             minValue = f.min * bfsuite.utils.decimalInc(f.decimals)
             maxValue = f.max * bfsuite.utils.decimalInc(f.decimals)
+            
+
             if f.mult ~= nil then
                 minValue = minValue * f.mult
                 maxValue = maxValue * f.mult
@@ -134,11 +137,11 @@ local function openPage(idx, title, script)
 
             bfsuite.app.formFields[i] = form.addNumberField(rateRows[f.row], pos, minValue, maxValue, function()
                 local value
-                if bfsuite.activeRateProfile == 0 then
-                    value = 0
-                else
+                --if bfsuite.activeRateProfile == 0 then
+                --    value = 0
+                --else
                     value = bfsuite.utils.getFieldValue(bfsuite.app.Page.fields[i])
-                end
+                --end
                 return value
             end, function(value)
                 f.value = bfsuite.utils.saveFieldValue(bfsuite.app.Page.fields[i], value)
