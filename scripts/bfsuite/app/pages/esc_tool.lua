@@ -56,7 +56,7 @@ local function openPage(pidx, title, script)
 
     local folder = title
 
-    ESC = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/pages/esc/" .. folder .. "/init.lua"))()
+    ESC = assert(loadfile("app/pages/esc/" .. folder .. "/init.lua"))()
 
     mspSignature = ESC.mspSignature
     mspHeaderBytes = ESC.mspHeaderBytes
@@ -110,7 +110,7 @@ local function openPage(pidx, title, script)
     })
     bfsuite.app.formNavigationFields['menu']:focus()
 
-    ESC.pages = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/pages/esc/" .. folder .. "/pages.lua"))()
+    ESC.pages = assert(loadfile("app/pages/esc/" .. folder .. "/pages.lua"))()
 
     modelLine = form.addLine("")
     modelText = form.addStaticText(modelLine, modelTextPos, "")
@@ -170,7 +170,7 @@ local function openPage(pidx, title, script)
 
         if bfsuite.config.iconSize ~= 0 then
             if bfsuite.app.gfx_buttons["esctool"][pvalue.image] == nil then
-                bfsuite.app.gfx_buttons["esctool"][pvalue.image] = lcd.loadMask(bfsuite.config.suiteDir .. "app/gfx/esc/" .. pvalue.image)
+                bfsuite.app.gfx_buttons["esctool"][pvalue.image] = lcd.loadMask("app/gfx/esc/" .. pvalue.image)
             end
         else
             bfsuite.app.gfx_buttons["esctool"][pvalue.image] = nil

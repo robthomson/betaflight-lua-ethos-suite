@@ -25,7 +25,7 @@ local config = {}
 -- LuaFormatter off
 config.toolName = "Betaflight"                                     -- name of the tool
 config.suiteDir = "/scripts/bfsuite/"                               -- base path the script is installed into
-config.icon = lcd.loadMask(config.suiteDir .. "app/gfx/icon.png")   -- icon
+config.icon = lcd.loadMask("app/gfx/icon.png")   -- icon
 config.Version = "1.0.0"                                            -- version number of this software release
 config.ethosVersion = 1518                                          -- min version of ethos supported by this script
 config.ethosVersionString = "ETHOS < V1.5.18"                       -- string to print if ethos version error occurs
@@ -36,7 +36,6 @@ config.watchdogParam = 10                                           -- watchdog 
 -- features
 config.logEnable = false                                            -- will log to: /scripts/bfsuite/bfsuite.log [default = false]
 config.logEnableScreen = false                                      -- if config.logEnable is true then also print to screen [default = false]
-config.useCompiler = true                                           -- enable use of the compiler to improve speed [default = true]
 config.mspTxRxDebug = true                                         -- simple print of full msp payload that is sent and received [default = false]
 config.reloadOnSave = false                                         -- trigger a reload on save [default = false]
 config.skipRssiSensorCheck = false                                  -- skip checking for a valid rssi [ default = false]
@@ -61,19 +60,19 @@ config.rf2govName = "Betaflight Governor"                          -- RF2Gov Nam
 
 -- LuaFormatter on
 
-local compile = assert(loadfile(config.suiteDir .. "compile.lua"))(config)
+
 
 -- main
 bfsuite = {}
 bfsuite.config = config
-bfsuite.app = assert(compile.loadScript(config.suiteDir .. "app/app.lua"))(config, compile)
-bfsuite.utils = assert(compile.loadScript(config.suiteDir .. "lib/utils.lua"))(config, compile)
+bfsuite.app = assert(loadfile("app/app.lua"))(config, compile)
+bfsuite.utils = assert(loadfile("lib/utils.lua"))(config, compile)
 
 
 
 -- tasks
 bfsuite.tasks = {}
-bfsuite.bg = assert(compile.loadScript(config.suiteDir .. "tasks/bg.lua"))(config, compile)
+bfsuite.bg = assert(loadfile("tasks/bg.lua"))(config, compile)
 
 
 -- LuaFormatter off

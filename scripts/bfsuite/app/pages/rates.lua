@@ -4,16 +4,16 @@ local tables = {}
 local activateWakeup = false
 local currentProfileChecked = false
 
-tables[0] = bfsuite.config.suiteDir .. "app/pages/ratetables/none.lua"
-tables[1] = bfsuite.config.suiteDir .. "app/pages/ratetables/betaflight.lua"
-tables[2] = bfsuite.config.suiteDir .. "app/pages/ratetables/raceflight.lua"
-tables[3] = bfsuite.config.suiteDir .. "app/pages/ratetables/kiss.lua"
-tables[4] = bfsuite.config.suiteDir .. "app/pages/ratetables/actual.lua"
-tables[5] = bfsuite.config.suiteDir .. "app/pages/ratetables/quick.lua"
+tables[0] = "app/pages/ratetables/none.lua"
+tables[1] = "app/pages/ratetables/betaflight.lua"
+tables[2] = "app/pages/ratetables/raceflight.lua"
+tables[3] = "app/pages/ratetables/kiss.lua"
+tables[4] = "app/pages/ratetables/actual.lua"
+tables[5] = "app/pages/ratetables/quick.lua"
 
 if bfsuite.rateProfile == nil then bfsuite.rateProfile = bfsuite.config.defaultRateProfile end
 
-local mytable = assert(compile.loadScript(tables[bfsuite.rateProfile]))()
+local mytable = assert(loadfile(tables[bfsuite.rateProfile]))()
 
 local fields = mytable.fields
 
@@ -46,7 +46,7 @@ end
 
 local function openPage(idx, title, script)
 
-    bfsuite.app.Page = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/pages/" .. script))()
+    bfsuite.app.Page = assert(loadfile("app/pages/" .. script))()
     -- collectgarbage()
 
     bfsuite.app.lastIdx = idx

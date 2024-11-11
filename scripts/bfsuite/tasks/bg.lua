@@ -33,8 +33,8 @@ bg.heartbeat = nil
 
 bg.init = false
 -- tasks
-bg.telemetry = assert(compile.loadScript(config.suiteDir .. "tasks/telemetry/telemetry.lua"))(config, compile)
-bg.msp = assert(compile.loadScript(config.suiteDir .. "tasks/msp/msp.lua"))(config, compile)
+bg.telemetry = assert(loadfile("tasks/telemetry/telemetry.lua"))(config, compile)
+bg.msp = assert(loadfile("tasks/msp/msp.lua"))(config, compile)
 
 
 bfsuite.rssiSensorChanged = true

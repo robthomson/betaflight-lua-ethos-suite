@@ -31,7 +31,7 @@ msp = {}
 msp.activeProtocol = nil
 msp.onConnectChecksInit = true
 
-local protocol = assert(compile.loadScript(config.suiteDir .. "tasks/msp/protocols.lua"))()
+local protocol = assert(loadfile("tasks/msp/protocols.lua"))()
 
 msp.sensor = sport.getSensor({primId = 0x32})
 msp.mspQueue = mspQueue
@@ -43,7 +43,7 @@ msp.protocol = protocol.getProtocol()
 
 -- preload all transport methods
 msp.protocolTransports = {}
-for i, v in pairs(protocol.getTransports()) do msp.protocolTransports[i] = assert(compile.loadScript(config.suiteDir .. v))() end
+for i, v in pairs(protocol.getTransports()) do msp.protocolTransports[i] = assert(loadfile(v))() end
 
 -- set active transport table to use
 local transport = msp.protocolTransports[msp.protocol.mspProtocol]
@@ -52,10 +52,10 @@ msp.protocol.mspSend = transport.mspSend
 msp.protocol.mspWrite = transport.mspWrite
 msp.protocol.mspPoll = transport.mspPoll
 
-msp.mspQueue = assert(compile.loadScript(config.suiteDir .. "tasks/msp/mspQueue.lua"))()
+msp.mspQueue = assert(loadfile("tasks/msp/mspQueue.lua"))()
 msp.mspQueue.maxRetries = msp.protocol.maxRetries
-msp.mspHelper = assert(compile.loadScript(config.suiteDir .. "tasks/msp/mspHelper.lua"))()
-assert(compile.loadScript(config.suiteDir .. "tasks/msp/common.lua"))()
+msp.mspHelper = assert(loadfile("tasks/msp/mspHelper.lua"))()
+assert(loadfile("tasks/msp/common.lua"))()
 
 -- BACKGROUND checks
 function msp.onConnectBgChecks()

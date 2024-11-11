@@ -152,7 +152,7 @@ end
 
 function ui.openMainMenu()
 
-    local MainMenu = assert(compile.loadScript(config.suiteDir .. "app/pages.lua"))()
+    local MainMenu = assert(loadfile("app/pages.lua"))()
 
 
     -- clear all nav vars
@@ -247,7 +247,7 @@ function ui.openMainMenu()
 
                                 if config.iconSize ~= 0 then
                                     if bfsuite.app.gfx_buttons["mainmenu"][pidx] == nil then
-                                        bfsuite.app.gfx_buttons["mainmenu"][pidx] = lcd.loadMask(config.suiteDir .. "app/gfx/menu/" .. pvalue.image)
+                                        bfsuite.app.gfx_buttons["mainmenu"][pidx] = lcd.loadMask("app/gfx/menu/" .. pvalue.image)
                                     end
                                 else
                                     bfsuite.app.gfx_buttons["mainmenu"][pidx] = nil
@@ -624,7 +624,7 @@ end
 function ui.openPageRefresh(idx, title, script, extra1, extra2, extra3, extra5, extra5)
 
     bfsuite.app.triggers.isReady = false
-    if script ~= nil then bfsuite.app.Page = assert(compile.loadScript(config.suiteDir .. "app/pages/" .. script))() end
+    if script ~= nil then bfsuite.app.Page = assert(loadfile("app/pages/" .. script))() end
 
 end
 
@@ -635,7 +635,7 @@ function ui.openPage(idx, title, script, extra1, extra2, extra3, extra5, extra5)
     bfsuite.app.formFields = {}
     bfsuite.app.formLines = {}
 
-    bfsuite.app.Page = assert(compile.loadScript(config.suiteDir .. "app/pages/" .. script))()
+    bfsuite.app.Page = assert(loadfile("app/pages/" .. script))()
 
     if bfsuite.app.Page.openPage then
         bfsuite.app.Page.openPage(idx, title, script, extra1, extra2, extra3, extra5, extra5)
@@ -813,7 +813,7 @@ function ui.navigationButtons(x, y, w, h)
     -- HELP BUTTON
     if navButtons.help ~= nil and navButtons.help == true then
 
-        local help = assert(compile.loadScript(config.suiteDir .. "app/help/pages.lua"))()
+        local help = assert(loadfile("app/help/pages.lua"))()
         local section = string.gsub(bfsuite.app.lastScript, ".lua", "") -- remove .lua
 
         bfsuite.app.formNavigationFields['help'] = form.addButton(line, {x = helpOffset, y = y, w = wS, h = h}, {

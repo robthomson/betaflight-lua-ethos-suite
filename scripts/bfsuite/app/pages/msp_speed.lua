@@ -235,7 +235,7 @@ local function openPage(pidx, title, script)
     })
 
     -- HELP BUTTON
-    local help = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/help/pages.lua"))()
+    local help = assert(loadfile("app/help/pages.lua"))()
     local section = string.gsub(bfsuite.app.lastScript, ".lua", "") -- remove .lua
     bfsuite.app.formNavigationFields['help'] = form.addButton(line, {x = x - buttonWs, y = bfsuite.app.radio.linePaddingTop, w = buttonWs, h = bfsuite.app.radio.navbuttonHeight}, {
         text = "?",

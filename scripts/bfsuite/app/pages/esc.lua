@@ -89,7 +89,7 @@ local function openPage(pidx, title, script)
         numPerRow = bfsuite.app.radio.buttonsPerRow
     end
 
-    local ESCMenu = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/pages/" .. script))()
+    local ESCMenu = assert(loadfile("app/pages/" .. script))()
 
     local lc = 0
     local bx = 0
@@ -108,7 +108,7 @@ local function openPage(pidx, title, script)
         if lc >= 0 then bx = (buttonW + padding) * lc end
 
         if bfsuite.config.iconSize ~= 0 then
-            if bfsuite.app.gfx_buttons["escmain"][pidx] == nil then bfsuite.app.gfx_buttons["escmain"][pidx] = lcd.loadMask(bfsuite.config.suiteDir .. "app/gfx/esc/" .. pvalue.image) end
+            if bfsuite.app.gfx_buttons["escmain"][pidx] == nil then bfsuite.app.gfx_buttons["escmain"][pidx] = lcd.loadMask("app/gfx/esc/" .. pvalue.image) end
         else
             bfsuite.app.gfx_buttons["escmain"][pidx] = nil
         end

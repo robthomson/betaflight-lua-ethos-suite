@@ -34,7 +34,7 @@ local function openPage(idx, title, script)
     bfsuite.app.uiState = bfsuite.app.uiStatus.pages
     bfsuite.app.triggers.isReady = false
 
-    bfsuite.app.Page = assert(compile.loadScript(bfsuite.config.suiteDir .. "app/pages/" .. script))()
+    bfsuite.app.Page = assert(loadfile("app/pages/" .. script))()
 
 
     bfsuite.app.lastIdx = idx
