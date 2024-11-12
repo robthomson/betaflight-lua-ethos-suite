@@ -23,7 +23,7 @@ local utils = {}
 
 local arg = {...}
 local config = arg[1]
-local compile = arg[2]
+
 
 
 
@@ -275,7 +275,6 @@ end
 -- simple wrapper - long term will enable 
 -- dynamic compilation
 function utils.loadScript(script)
-    -- system.compile(script)
     return loadfile(script)
 end
 

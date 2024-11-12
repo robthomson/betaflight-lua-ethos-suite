@@ -8,7 +8,7 @@ local currentProfileChecked = false
 rows = {"Roll", "Pitch", "Yaw"}
 -- cols = {"P", "I", "O", "D", "F", "B"}
 -- cols = {"D", "P", "I", "F", "O", "B"}
-cols = {"P", "I", "D"}
+cols = {"P", "I", "D","FF","D Min"}
 
 -- P
 fields[1] = {help = "profilesProportional", row = 1, col = 1, min = 0, max = 1000, default = 50, vals = {1}}

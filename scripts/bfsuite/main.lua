@@ -65,14 +65,14 @@ config.rf2govName = "Betaflight Governor"                          -- RF2Gov Nam
 -- main
 bfsuite = {}
 bfsuite.config = config
-bfsuite.app = assert(loadfile("app/app.lua"))(config, compile)
-bfsuite.utils = assert(loadfile("lib/utils.lua"))(config, compile)
+bfsuite.app = assert(loadfile("app/app.lua"))(config)
+bfsuite.utils = assert(loadfile("lib/utils.lua"))(config)
 
 
 
 -- tasks
 bfsuite.tasks = {}
-bfsuite.bg = assert(loadfile("tasks/bg.lua"))(config, compile)
+bfsuite.bg = assert(loadfile("tasks/bg.lua"))(config)
 
 
 -- LuaFormatter off

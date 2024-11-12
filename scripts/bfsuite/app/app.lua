@@ -24,7 +24,7 @@ local app = {}
 local arg = {...}
 
 local config = arg[1]
-local compile = arg[2]
+
 
 local triggers = {}
 triggers.exitAPP = false
@@ -53,7 +53,7 @@ triggers.wasConnected = false
 triggers.isArmed = false
 triggers.showSaveArmedWarning = false
 
-app.compile = compile
+
 
 bfsuite.config = {}
 bfsuite.config = config
@@ -71,7 +71,7 @@ app.triggers = {}
 app.triggers = triggers
 
 app.ui = {}
-app.ui = assert(loadfile("app/lib/ui.lua"))(config, compile)
+app.ui = assert(loadfile("app/lib/ui.lua"))(config)
 
 app.sensors = {}
 app.formFields = {}
